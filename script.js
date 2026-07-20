@@ -1,17 +1,25 @@
-const btn = document.querySelector("#e_btn");
-const circle = document.querySelector("#circle");
+const btn = document.querySelector("#btn");
+const textInput = document.querySelector("#text");
 const square = document.querySelector("#square");
+const eBtn = document.querySelector("#e_btn");
+const range = document.querySelector("#range");
+const circle = document.querySelector("#circle");
+const rangeSpan = document.querySelector("#range-span");
 
-const toggler = function (event) {
-  console.log(
-    "Событие сработало на " +
-      event.target.id +
-      " и перенеслось на " +
-      event.currentTarget.id,
-  );
-  event.target.classList.toggle("green");
-};
+btn.addEventListener("click", function (event) {
+  event.preventDefault();
+  const color = textInput.value.trim();
+  if (color) {
+    square.style.backgroundColor = color;
+  }
+});
 
-btn.addEventListener("click", toggler, true);
-circle.addEventListener("click", toggler, true);
-square.addEventListener("click", toggler, true);
+eBtn.style.display = "none";
+
+range.addEventListener("input", function () {
+  const percent = range.value + "%";
+  circle.style.width = percent;
+  circle.style.height = percent;
+
+  rangeSpan.textContent = range.value + "%";
+});
